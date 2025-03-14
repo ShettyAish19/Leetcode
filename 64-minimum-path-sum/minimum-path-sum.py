@@ -1,21 +1,21 @@
+from typing import List
+
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        m=len(grid)
-        n=len(grid[0])
-        dp=[[-1]*n for i in range(m)]
-        dp[0][0]=grid[0][0]
-        def f(i,j,dp):
+        m, n = len(grid), len(grid[0])
+        dp = [[0] * n for _ in range(m)]
 
-            if i<0 or j<0:
-                return float('inf')
-            if i==0 and j==0:
-                return dp[i][j]
-            if dp[i][j]!=-1:
-                return dp[i][j]
-            s_left=grid[i][j]+f(i,j-1,dp)
-            s_up=grid[i][j]+f(i-1,j,dp)
-            dp[i][j]=min(s_left,s_up)
-            return dp[i][j]
+        for i in range(m):
+            for j in range(n):
+                if i == 0 and j == 0:
+                    dp[i][j] = grid[i][j]  # Starting point
+                elif i == 0:
+                    dp[i][j] = dp[i][j-1] + grid[i][j]  # First row
+                elif j == 0:
+                    dp[i][j] = dp[i-1][j] + grid[i][j]  # First column
+                else:
+                    dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])  # Inner cells
 
-        return f(m-1,n-1,dp)
+        return dp[m-1][n-1]
+
         
