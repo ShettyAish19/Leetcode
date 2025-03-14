@@ -1,4 +1,4 @@
-class Solution:
+'''class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
 
         m=len(triangle)
@@ -14,6 +14,18 @@ class Solution:
             dp[i][j]=min(left,right)
             return dp[i][j]
         
-        return f(0,0)
+        return f(0,0)'''
 
-        
+       
+
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        m = len(triangle)
+        dp = triangle[-1][:]  # Initialize dp as the last row of the triangle
+
+        # Bottom-up DP starting from second-last row
+        for i in range(m - 2, -1, -1):
+            for j in range(i + 1):  # Only iterate valid elements in the current row
+                dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])
+
+        return dp[0]  # The top cell now contains the minimum path sum
