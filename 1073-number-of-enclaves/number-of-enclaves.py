@@ -1,4 +1,4 @@
-class Solution:
+'''class Solution:
     def numEnclaves(self, grid: List[List[int]]) -> int:
         m,n=len(grid),len(grid[0])
         
@@ -27,7 +27,39 @@ class Solution:
                 if grid[i][j]==1:
                     count+=1
                 
-        return count
+        return count'''
+
+      
+
+class Solution:
+    def numEnclaves(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        q = deque()
+
+        # Step 1: Add all boundary 1s to the queue
+        for i in range(m):
+            if grid[i][0] == 1:
+                q.append((i, 0))
+            if grid[i][n-1] == 1:
+                q.append((i, n-1))
+        for j in range(n):
+            if grid[0][j] == 1:
+                q.append((0, j))
+            if grid[m-1][j] == 1:
+                q.append((m-1, j))
+
+        # Step 2: BFS and mark all reachable land from edges
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        while q:
+            r, c = q.popleft()
+            if 0 <= r < m and 0 <= c < n and grid[r][c] == 1:
+                grid[r][c] = 0  # Mark visited
+                for dr, dc in directions:
+                    q.append((r + dr, c + dc))
+
+        # Step 3: Count remaining 1s
+        return sum(grid[i][j] == 1 for i in range(m) for j in range(n))
+
         
 
 
