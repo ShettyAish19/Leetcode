@@ -1,39 +1,26 @@
-import queue
+from typing import List
+
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        adj=[[] for i in range(len(graph))]
-        q=queue.Queue()
+        n = len(graph)
+        reverse_graph = [[] for _ in range(n)]
+        indegree = [0] * n
 
-        for i in range(len(graph)):
-            for j in graph[i]:
-                adj[j].append(i)
+        # Build reversed graph and count indegree in one loop
+        for u in range(n):
+            for v in graph[u]:
+                reverse_graph[v].append(u)
+                indegree[u] += 1
 
-        indegree=[0]*len(graph)
-        for i in range(len(adj)):
-            for j in adj[i]:
-                indegree[j]+=1
+        stack = [i for i in range(n) if indegree[i] == 0]
+        safe = []
 
-        for i in range(len(graph)):
-            if indegree[i]==0:
-                q.put(i)
+        while stack:
+            node = stack.pop()
+            safe.append(node)
+            for neighbor in reverse_graph[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    stack.append(neighbor)
 
-
-        ans=[]
-        
-        while not q.empty():
-            node=q.get()
-            ans.append(node)
-            for j in adj[node]:
-                indegree[j]-=1
-                if indegree[j]==0:
-                    q.put(j)
-
-            
-
-        ans.sort()
-        return ans
-
-
-
-
-        
+        return sorted(safe)
