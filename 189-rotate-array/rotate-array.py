@@ -5,15 +5,19 @@ class Solution:
         """
         n=len(nums)
         k=k%n
-        def rev(arr,start,end):
-            while start<end:
-                arr[start],arr[end]=arr[end],arr[start]
-                start+=1
-                end-=1
-            return arr
-
-        rev(nums,0,len(nums)-1)
-        rev(nums,0,k-1)
-        rev(nums,k,len(nums)-1)
+        start=0
+        count=0
+        while count<n:
+            cur=start
+            prev=nums[start]
+            while True:
+                next_idx=(cur+k)%n
+                nums[next_idx],prev=prev,nums[next_idx]
+                cur=next_idx
+                count+=1
+                if cur==start:
+                    break
+            start+=1
+            
 
         
