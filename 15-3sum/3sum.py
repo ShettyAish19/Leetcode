@@ -1,4 +1,4 @@
-class Solution:
+'''class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         res=set()
         n=len(nums)
@@ -27,7 +27,29 @@ class Solution:
                 elif s>0:
                     r-=1
         
-        return L
+        return L'''
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = set()
+        n = len(nums)
+
+        for i in range(n - 2):
+            l, r = i + 1, n - 1
+            while l < r:
+                total = nums[i] + nums[l] + nums[r]
+                if total == 0:
+                    res.add((nums[i], nums[l], nums[r]))
+                    l += 1
+                    r -= 1
+                elif total < 0:
+                    l += 1
+                else:
+                    r -= 1
+
+        return list(res)
+
             
 
 
