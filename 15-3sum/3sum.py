@@ -1,10 +1,10 @@
-'''class Solution:
+class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         res=set()
         n=len(nums)
         L=[]
         nums.sort()
-        for i in range(n-1):
+        for i in range(n-2):
             if i>0 and nums[i]==nums[i-1]:
                 continue
             
@@ -27,9 +27,9 @@
                 elif s>0:
                     r-=1
         
-        return L'''
+        return L
 
-class Solution:
+'''class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         res = set()
@@ -48,7 +48,7 @@ class Solution:
                 else:
                     r -= 1
 
-        return list(res)
+        return list(res)'''
 
             
 
