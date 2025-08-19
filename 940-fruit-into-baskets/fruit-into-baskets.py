@@ -6,7 +6,7 @@ class Solution:
         maxi=0
         k=2
         for end in range(len(fruits)):
-          if   fruits[end] not in d and k>=0:
+          if   fruits[end] not in d :
             d[fruits[end]]=1
             k-=1
           
