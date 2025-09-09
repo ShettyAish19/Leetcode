@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def H(self, root: Optional[TreeNode]) -> int:
+    '''def H(self, root: Optional[TreeNode]) -> int:
         if root==None:
             return 0
 
@@ -21,7 +21,29 @@ class Solution:
             return False
 
     
-        return self.isBalanced(root.left) and self.isBalanced(root.right)
+        return self.isBalanced(root.left) and self.isBalanced(root.right)'''
+
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        def check(node):
+            if node is None:
+                return 0
+
+            left=check(node.left)
+            if left==-1:
+                return -1
+            right=check(node.right)
+            if right==-1:
+                return -1
+
+            if abs(right-left)>1:
+                return -1
+
+            else:
+                return 1+max(left,right)
+
+        return check(root)!=-1
+
+
 
        
 
