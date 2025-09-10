@@ -25,8 +25,8 @@ class Solution:
         for col, row, val in nodes:
             col_table[col].append(val)
 
-        
-        return [col_table[x] for x in sorted(col_table.keys())]
+        return [col_table[x] for x in col_table.keys()]
+        #return [col_table[x] for x in sorted(col_table.keys())]
 
             
         
