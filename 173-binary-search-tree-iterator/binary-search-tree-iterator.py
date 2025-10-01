@@ -10,16 +10,15 @@ class BSTIterator:
         self.temp=-1
         self.inorder=[]
 
-        def in_traversal(node):
-            if node is None:
-                return 
-
-            in_traversal(node.left)
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
             self.inorder.append(node.val)
-            in_traversal(node.right)
+            if node.right:
+                traverse(node.right)
+        if root:
+            traverse(root)
 
-        in_traversal(root)
-        
 
     def next(self) -> int:
         self.temp += 1
