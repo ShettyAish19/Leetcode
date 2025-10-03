@@ -3,16 +3,21 @@ class MyStack:
 
     def __init__(self):
         self.q1=deque()
-        self.q2=deque()
+        #self.q2=deque()
         
 
     def push(self, x: int) -> None:
-        self.q2.append(x)
+        '''self.q2.append(x)
 
         while self.q1:
             self.q2.append(self.q1.popleft())
 
-        self.q1,self.q2=self.q2,self.q1
+        self.q1,self.q2=self.q2,self.q1'''
+
+        self.q1.append(x)
+        for i in range(len(self.q1)-1):
+            self.q1.append(self.q1.popleft())
+            
 
 
     def pop(self) -> int:
