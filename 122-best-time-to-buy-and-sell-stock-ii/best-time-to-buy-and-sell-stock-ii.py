@@ -1,6 +1,6 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        def f(i,buy):
+        '''def f(i,buy):
             if i==n:
                 return 0
             if dp[i][buy]!=-1:
@@ -17,7 +17,16 @@ class Solution:
             
         n=len(prices)
         dp=[[-1]*2 for _ in range(n)]
-        return f(0,1)
+        return f(0,1)'''
+
+        n=len(prices)
+        profit=0
+        for i in range(1,n):
+            if prices[i]>prices[i-1]:
+                profit+=prices[i]-prices[i-1]
+
+        return profit
+
 
 
 
