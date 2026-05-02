@@ -1,6 +1,6 @@
 class Solution:
     def maxProfit(self, prices: List[int], fee: int) -> int:
-        def f(i,buy):
+        '''def f(i,buy):
             if i>=n:
                 return 0
             if dp[i][buy]!=-1:
@@ -14,5 +14,17 @@ class Solution:
             return dp[i][buy]
         n=len(prices)
         dp=[[-1]*2 for _ in range(n)]
-        return f(0,1)
+        return f(0,1)'''
+
+        sell=0
+        buy=-prices[0]
+
+        for price in prices[1:]:
+            sell=max(sell,price+buy-fee)
+            buy=max(buy,sell-price)
+
+        return sell
+            
+
+
         
