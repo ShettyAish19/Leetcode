@@ -1,19 +1,28 @@
 class Solution:
     def frequencySort(self, s: str) -> str:
-        d={}
-        for j in s:
-            if j in d:
-                d[j]+=1
+
+        d = {}
+
+        for ch in s:
+            if ch in d:
+                d[ch] += 1
             else:
-                d[j]=1
+                d[ch] = 1
 
-        s_d=sorted(d.items(),key=lambda x:-x[1])
+        max_d = max(d.values())
 
-        st=""
-        for j,k in s_d:
-            st+=(j*k)
+        # bucket[f] = characters having frequency f
+        bucket = [[] for _ in range(max_d + 1)]
 
-        return st
+        for ch, freq in d.items():
+            bucket[freq].append(ch)
 
+        ans = ""
 
-        
+        # highest frequency first
+        for freq in range(max_d, 0, -1):
+
+            for ch in bucket[freq]:
+                ans += ch * freq
+
+        return ans
