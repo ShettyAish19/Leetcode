@@ -1,6 +1,6 @@
 class Solution:
     def minPenalty(self, period: int, lights: list[int], arrivalTime: list[int]) -> int:
-        maxi=0
+        '''maxi=0
         for i in range(len(arrivalTime)):
             arrivalTime[i]=arrivalTime[i]%period
 
@@ -22,7 +22,18 @@ class Solution:
             i+=1
             
 
-        return maxi
+        return maxi'''
+
+        max_green = max(lights)
+        ans = 0
+
+        for time in arrivalTime:
+            r = time % period
+
+            if r >= max_green:
+                ans = max(ans, period - r)
+
+        return ans
 
 
             
