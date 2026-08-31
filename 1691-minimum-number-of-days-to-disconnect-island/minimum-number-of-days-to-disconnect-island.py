@@ -21,6 +21,9 @@ class Solution:
                 for c in range(m):
                     if grid[r][c]==1 and (r,c) not in vis:
                         count+=1
+                        if count>1:
+                            return 2
+                            
                         dfs(r,c)
 
             return count
